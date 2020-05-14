@@ -1,0 +1,50 @@
+#U sed vagrant config version
+VAGRANT_CONFIG_VERSION = "2"
+
+# Virtual hosts configuration
+VIRTUAL_HOSTS = {
+    :"kernel-update" => {
+        :image => "jekys/centos-7-8-kernel-5.6.12-elrepo", # Image name (Box)
+        :cpu => 2, # Count of CPU cores
+        :ram => 1024, # RAM (Mb)
+        :networks => [], # Used networks
+        :ports => [], # Forwarded ports
+        :shared_folder => './share', # Path to shared folder on the host machine
+        :shared_folder_local => '/vagrant' # Path to shared folder from host machine on VM
+    }
+}
+
+Vagrant.configure(VAGRANT_CONFIG_VERSION) do |config|
+    VIRTUAL_HOSTS.each do |vhost, vhost_conf|
+        # Disable shared folders
+        config.vm.synced_folder vhost_conf[:shared_folder], vhost_conf[:shared_folder_local], disabled: false
+
+        # Apply VM config
+        config.vm.define vhost do |box|
+            # Set VM base box and hostname
+            box.vm.box = vhost_conf[:image]
+            box.vm.host_name = vhost.to_s
+
+            # Additional network config if present
+            if vhost_conf.key?(:networks)
+                vhost_conf[:networks].each do |ipconf|
+                    box.vm.network "private_network", ipconf
+                end
+            end
+
+            # Port-forward config if present
+            if vhost_conf.key?(:ports)
+                vhost_conf[:ports].each do |port|
+                    box.vm.network "forwarded_port", port
+                end
+            end
+
+            # VM resources config
+            box.vm.provider "virtualbox" do |v|
+                # Set VM RAM size and CPU count
+                v.memory = vhost_conf[:ram]
+                v.cpus = vhost_conf[:cpu]
+            end
+        end
+    end
+end
