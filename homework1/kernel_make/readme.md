@@ -13,11 +13,11 @@ cd packer
 packer build kernel-make.json
 ```
 
-В ходе сборки packer последовательно выполнит скрипты из папки packer/scripts:
+В ходе сборки packer последовательно выполнит скрипты из папки [packer/scripts](https://github.com/jekys13/otus-linux/tree/master/homework1/kernel_make/packer/scripts):
 
-* 1-kernel_make.sh - закачка ядра с kernel.org, компиляция, установка, настройка grub
-* 2-shared_folders.sh - монтирование VBoxGuestAdditions.iso и запуск с него установки пакетов для работы shared folders
-* 3-clean.sh - очистка сборки перед запаковкой в образ
+* [1-kernel_make.sh](https://github.com/jekys13/otus-linux/blob/master/homework1/kernel_make/packer/scripts/1-kernel_make.sh) - закачка ядра с kernel.org, компиляция, установка, настройка grub
+* [2-shared_folders.sh](https://github.com/jekys13/otus-linux/blob/master/homework1/kernel_make/packer/scripts/2-shared_folders.sh) - монтирование VBoxGuestAdditions.iso и запуск с него установки пакетов для работы shared folders
+* [3-clean.sh](https://github.com/jekys13/otus-linux/blob/master/homework1/kernel_make/packer/scripts/3-clean.sh) - очистка сборки перед запаковкой в образ
 
 Сам образ выложен на Vagrnat Cloud: https://app.vagrantup.com/jekys/boxes/centos-7-8-kernel-5.6.12-compiled
 
