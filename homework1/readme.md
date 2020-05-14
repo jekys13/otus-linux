@@ -9,12 +9,14 @@
 Для выполнения ДЗ со * и ** вам потребуется сборка ядра и модулей из исходников.
 
 **Критерии оценки:** Основное ДЗ - в репозитории есть рабочий Vagrantfile с вашим образом.
+
 **ДЗ со звездочкой:** Ядро собрано из исходников
+
 **ДЗ с двумя звездочками:** В вашем образе нормально работают VirtualBox Shared Folders
 
 Задание выполнено в двух вариантах (лежат в подпапках):
 
-* kernel_update - обновление ядра через установку нового из репозитория elrepo
-* kernel_make - компиляция ядра с kernel.org
+* [kernel_update](https://github.com/jekys13/otus-linux/tree/master/homework1/kernel_update) - обновление ядра через установку нового из репозитория elrepo
+* [kernel_make](https://github.com/jekys13/otus-linux/tree/master/homework1/kernel_make) - компиляция ядра с kernel.org
 
 В обоих вариантах работаю shared folders
